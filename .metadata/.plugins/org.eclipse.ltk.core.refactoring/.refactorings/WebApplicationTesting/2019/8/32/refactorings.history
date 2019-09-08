@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 3 elements from project &apos;WebApplicationTesting&apos;&#x0D;&#x0A;- Original project: &apos;WebApplicationTesting&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     chromedriver_win32&#x0D;&#x0A;     edgedriver_win64&#x0D;&#x0A;     geckodriver-v0.24.0-win64" description="Delete elements" element1="driverFiles/edgedriver_win64" element2="driverFiles/geckodriver-v0.24.0-win64" element3="driverFiles/chromedriver_win32" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="3" stamp="1565078661314" subPackages="false" version="1.0"/>
+</session>

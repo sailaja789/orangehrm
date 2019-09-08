@@ -1,0 +1,21 @@
+package com.monsterusingselect;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Monster_currentlocation_industry_select 
+{
+public static void main(String[] args) 
+{
+	WebDriver driver=null;
+	String url="https://my.monsterindia.com/sponsered_popup_html";
+	System.setProperty("webdriver.chrome.driver","./driverfiles/chromedriver.exe");
+	driver=new ChromeDriver();
+	driver.get(url);
+	//maximizing the window
+	driver.manage().window().maximize();
+	
+
+	}
+
+}

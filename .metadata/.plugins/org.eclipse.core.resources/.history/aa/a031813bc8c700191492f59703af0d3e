@@ -1,0 +1,72 @@
+package com.ExcelOperrions;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Excel_Orangehrm_Login_Write_Validations 
+{
+	public static void main(String[] args) throws IOException, InterruptedException
+	{
+		WebDriver driver=null;
+		String url="http://127.0.0.1/orangehrm-4.0/symfony/web/index.php/auth/login";
+		//Automating ChromeBrowser
+		System.setProperty("webdriver.chrome.driver","./driverfiles/chromedriver");
+		driver=new ChromeDriver();
+		driver.get(url);
+		//maximize the Browser
+		driver.manage().window().maximize();
+		//login to Orangehrm Application
+		//Identifying the file in the System
+		FileInputStream file=new FileInputStream("./SingleTestDate/ExcelOrangehrmWriteOperations.xlsx");
+		//Identifying the workbook in the above file
+		XSSFWorkbook workbook=new XSSFWorkbook(file);
+		//Identifying the particular sheet in the above workbook
+		XSSFSheet sheet=workbook.getSheet("sheet1");
+		//Identifying a particular row in the sheetfffff
+			Row row=sheet.getRow(1);
+			//Identifying the particular row of a cell
+			WebElement userName=driver.findElement(By.id("txtUsername"));
+			userName.sendKeys(row.getCell(1).getStringCellValue());
+			WebElement password=driver.findElement(By.id("txtPassword"));
+			password.sendKeys(row.getCell(1).getStringCellValue());
+			WebElement login=driver.findElement(By.id("btnLogin"));
+			login.click();
+			WebElement welcomeElement=driver.findElement(By.id("welcome"));
+			String Expected_loginText="welcome";
+			System.out.println("the expected login text is : "+Expected_loginText);
+			String Actual_loginText=welcomeElement.getText();
+			System.out.println("the actual login text is : "+Actual_loginText);
+			if(Actual_loginText.contains(Expected_loginText))
+			{
+				System.out.println("login successfull - PASS");
+				row.createCell(2).setCellValue("login - PASS");
+			}
+			else
+			{
+				System.out.println("login failed - FAIL");
+				row.createCell(2).setCellValue("login failed - FAIL");
+			}
+			FileOutputStream file1=new FileOutputStream("./SingleTestDate/ExcelOrangehrmWriteOperations.xlsx");
+			workbook.write(file1);
+			File bing_screenshot=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(bing_screenshot,new File("./screenshots/orangehrm.png"));
+			workbook.write(file1);
+			welcomeElement.click();
+		    Thread.sleep(1000);
+			driver.findElement(By.linkText("Logout")).click();
+           driver.quit();
+}
+
+}

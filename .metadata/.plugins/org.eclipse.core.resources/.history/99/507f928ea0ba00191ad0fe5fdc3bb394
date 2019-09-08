@@ -1,0 +1,16 @@
+package com.AutomateFacebookLoginPage;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class Facebook_LoginTest 
+{
+     public static void main(String[] args) 
+	 {
+    	 WebDriver driver=null;
+		driver.findElement(By.id("email")).sendKeys("mv.sailaja666@gmail.com");
+		driver.findElement(By.id("pass")).sendKeys("jayaansh");
+		driver.findElement(By.id("loginbutton")).click();
+	 }
+
+}
